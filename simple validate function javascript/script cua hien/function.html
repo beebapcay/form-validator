@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="file" name="file" id="file" onchange="changeFile()">
+  <input type="text" name="test" id="test" onchange="change()">
+  <button onclick="test()">click</button>
+  <script>
+    var value = "";
+    var file = null;
+    function change(){
+      var element = document.getElementById("test");
+      value = element.value;
+    }
+    const addPara = (text) => {
+      const p = document.createElement("p");
+      p.textContent = text;
+      document.body.appendChild(p);
+    }
+    function changeFile(){
+      var input = document.getElementById("file");
+      file = input.files[0];
+      addPara(`File ${file.name} is ${file.size} bytes in size`);
+    }
+    function test(){
+      console.log(isHaveSpecialText(value));
+    }
+  </script>
+</body>
+<script>
+  // string is number
+  function isNum(value){
+    if (!value)  // case value is null
+      return false;
+    return !isNaN(value);
+  }
+  // string is only alphabet and number
+  function isAlphabetNumber(value){
+    var regex = /^[A-Za-z0-9]+$/;
+    return regex.test(value);
+  }
+  // string is have number
+  function isHaveNumber(value){
+    var regex = /[0-9]/;
+    return regex.test(value);
+  }
+  // string is have alphabet
+  function isHaveAlphabet(value){
+    var regex = /[A-Za-z]/;
+    return regex.test(value);
+  }
+  // string is have capital alphabet (chu viet hoa)
+  function isHaveCapitalAlphabet (value){
+    var regex = /[A-Z]/;
+    return regex.test(value);
+  }
+  // string is only special ki tu
+  function isOnlySpecialText(value){
+    var regex = /^[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]*$/;
+    return regex.test(value);
+  }
+  // string is have special ki tu
+  function isHaveSpecialText(value){
+    var regex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
+    return regex.test(value);
+  }
+  // max length string
+  function checkMaxLength(value,maxLength){
+    if (value.length > maxLength)
+      return false;
+    return true;
+  }
+  // min length string
+  function checkMinLength(value,minLength){
+    if (value.length < minLength)
+      return false;
+    return true;
+  }
+  // is email
+  function isEmail(value){
+    var regex = /\S+@\S+\.\S+/g;
+    return regex.test(value);
+  }
+  // check string in array
+  const arrayExample = ["up", "down", "right","left"];
+  function checkArray(value,array){
+    const index = array.findIndex(element => {
+      return element.toLowerCase() === value.toLowerCase();
+    });
+    if (index < 0)
+      return false;
+    return true;
+  }
+
+  
+  //Date javascript support type date:
+    //Date have iso format "2011-10-10T14:48:00"
+    //Date have long format "03/25/2015"
+    //Date have short format "Mar 25 2015" or "25 Mar 2015"
+
+  //check date
+  function checkDate(value){ 
+    const d = new Date(value);
+    return !isNaN(d.getTime());
+  }
+  // check date between two date
+  function checkDateBetween(value,Date1,Date2){
+    const d1 = new Date(Date1);
+    const d2 = new Date(Date2);
+    const d = new Date(value);
+    if (d1.getTime() <= d.getTime() && d2.getTime() >= d.getTime())
+      return true;
+    return false;
+  }
+  // check time diff two date < miliseconds
+  function checkDiffTime(Date1,Date2,miliseconds){
+    const d1 = new Date(Date1);
+    const d2 = new Date(Date2);
+    if (Math.abs(d1-d2) < miliseconds)
+      return true;
+    return false;
+  }
+
+
+
+  // file size
+  function maxByteFileSize(file,bytes){
+    if (file.size > bytes)
+      return false;
+    return true;
+  }
+
+  // file type is image
+  function typeImageFile(file){
+    if (file.type.includes("image"))
+      return true;
+    return false;
+  }
+  // file type is video
+  function typeImageFile(file){
+    if (file.type.includes("video"))
+      return true;
+    return false;
+  }
+  // file type have type
+  function typeFile(file,type){ // example type "image/jpeg","image","image/png"
+    if (file.type.includes(type))
+      return true;
+    return false;
+  }
+  // file check extension
+  function checkExtension(file,extension){ // example extension = "md"
+    if (extension == null)
+      return false;
+    if (extension === file.name.split('.').pop()){
+      return true;
+    }
+    return false;
+  }
+</script>
+</html>
+
