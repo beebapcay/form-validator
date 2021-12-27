@@ -1,5 +1,5 @@
-import Component from './Component';
-import Element from './Element';
+import Component from './Component.js';
+import Element from './Element.js';
 
 class Form extends Component {
   constructor(options, validator, form) {
@@ -7,9 +7,9 @@ class Form extends Component {
     this.elements = [];
 
     // divide form into element
-    if (form.is( "form" )) {
+    if (form) {
       for (let i = 0; i < form.length; i++) {
-        elements.push(Element(options, validator, form[i]));
+        this.elements.push(new Element(options, validator, form[i]));
       }
     }
   }
