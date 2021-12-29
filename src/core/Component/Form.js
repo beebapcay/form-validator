@@ -20,7 +20,7 @@ class Form extends Component {
   }
 
   validate(options) {
-    this.validator.validate(options);
+    //this.validator.validate(options);
     for (let element of this.elements) element.validate();
   }
 }

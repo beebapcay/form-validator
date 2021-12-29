@@ -1,3 +1,3 @@
-function maxlength(value,max){ 
+export function maxlength(value,max){ 
     return value.length <= max;
 }

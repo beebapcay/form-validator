@@ -1,6 +1,6 @@
 import Component from './Component.js';
 import WrapMethod from './WrapMethod.js';
-// import * as allMethod from "../../utils";
+import * as allMethod from "../../utils/index.js";
 
 class Element extends Component {
     constructor(options, validator, element) {
@@ -9,6 +9,7 @@ class Element extends Component {
         this.validator = validator;
         this.attributes = null;
         this.wrap = null;
+        this.value = element.value;
 
         // get all attributes in DOM of element and value of this element
         if (element)
@@ -26,23 +27,26 @@ class Element extends Component {
         var wrapTemp = null;
         for (let data in this.attributes)
         {
-            // if (typeof allMethod[data] !== "undefined")
-            // {
-            //     if (this.wrap === null)
-            //     {
-            //         this.wrap = new WrapMethod(allMethod[data],attributes[data]);
-            //         wrapTemp = this.wrap;
-            //     }else{
-            //         const wrap = new WrapMethod(allMethod[data],attributes[data]);
-            //         wrapTemp.setWrap(wrap);
-            //         wrapTemp = wrap;
-            //     }
-            // }
+            if (typeof allMethod[data] !== "undefined")
+            {
+                if (this.wrap === null)
+                {
+                    this.wrap = new WrapMethod(allMethod[data],attributes[data]);
+                    wrapTemp = this.wrap;
+                }else{
+                    const wrap = new WrapMethod(allMethod[data],attributes[data]);
+                    wrapTemp.setWrap(wrap);
+                    wrapTemp = wrap;
+                }
+            }
         }
     }
 
     validate(){
-
+        if (this.wrap !== null)
+        {
+            this.wrap.validate(this.value);
+        }
     }
 }
 

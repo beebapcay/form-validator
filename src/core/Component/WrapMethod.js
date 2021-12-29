@@ -9,8 +9,15 @@ class WrapMethod {
         this.wrap = wrap;
     }
 
-    validate(value, errors){
-        
+    validate(value){
+        if (this.func(value,this.arg) === false)
+        {
+            console.log(this.func.name + " fail");
+        }
+        if (this.wrap !== null)
+        {
+            this.wrap.validate(value);
+        }
     }
 }
 

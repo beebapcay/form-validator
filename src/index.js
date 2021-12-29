@@ -1,17 +1,10 @@
-import ErrorTriggerByLog from './core/ErrorTrigger/ErrorTriggerByLog.js';
+import Form from "./core/Component/Form.js";
+var form = document.getElementById("basic-form");
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  var form1 = new Form(null,null,form);
+  form1.validate();
+});
 
-const errorLog = new ErrorTriggerByLog(
-  {
-    window: '11',
-    document: 0,
-  },
-  new ErrorTriggerByLog(
-    {
-      window: '10',
-      document: 1,
-    },
-    undefined
-  )
-);
 
-errorLog.trigger(new Error('test'));
+
