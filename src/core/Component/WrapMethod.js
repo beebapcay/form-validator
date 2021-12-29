@@ -1,21 +1,19 @@
 class WrapMethod {
-    constructor(func,arg) {
+    constructor(func, arg) {
         this.wrap = null;
         this.func = func;
         this.arg = arg;
     }
 
-    setWrap(wrap){
+    setWrap(wrap) {
         this.wrap = wrap;
     }
 
-    validate(value){
-        if (this.func(value,this.arg) === false)
-        {
-            console.log(this.func.name + " fail");
+    validate(value) {
+        if (this.func(value, this.arg) === false) {
+            console.log(this.func.name + " failed");
         }
-        if (this.wrap !== null)
-        {
+        if (this.wrap !== null) {
             this.wrap.validate(value);
         }
     }

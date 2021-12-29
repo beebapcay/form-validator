@@ -1,6 +1,7 @@
 import Component from './Component.js';
 import WrapMethod from './WrapMethod.js';
-import * as allMethod from "../../utils/index.js";
+import * as allMethod from "../../utils/";
+import {camelize} from "../../utils/camelize.js";
 
 class Element extends Component {
     constructor(options, validator, element) {
@@ -12,29 +13,30 @@ class Element extends Component {
         this.value = element.value;
 
         // get all attributes in DOM of element and value of this element
-        if (element)
-        {
-            var attributes = {}; 
-            $.each( element.attributes, function( index ) {
+        if (element) {
+            let attributes = {};
+            $.each(element.attributes, function (index) {
+                // attribute names from HTML is saved as lowercase
+                // (eg. 'creditCard' becomes 'creditcard').
+                // therefore, in order to work with the utilities functions (their name are in camelCase),
+                // the attribute name should convert to camelCase.
                 const attr = element.attributes[index];
-                // else add this attr to atributes
-                attributes[ attr.name ] = attr.value;
-            } ); 
+                const attrName = camelize(attr.name);
+                // else add this attr to attributes
+                attributes[attrName] = attr.value;
+            });
             this.attributes = attributes;
         }
 
         // need decorator method after if attribute == method name
-        var wrapTemp = null;
-        for (let data in this.attributes)
-        {
-            if (typeof allMethod[data] !== "undefined")
-            {
-                if (this.wrap === null)
-                {
-                    this.wrap = new WrapMethod(allMethod[data],attributes[data]);
+        let wrapTemp = null;
+        for (const data in this.attributes) {
+            if (typeof allMethod[data] !== "undefined") {
+                if (this.wrap === null) {
+                    this.wrap = new WrapMethod(allMethod[data], this.attributes[data]);
                     wrapTemp = this.wrap;
-                }else{
-                    const wrap = new WrapMethod(allMethod[data],attributes[data]);
+                } else {
+                    const wrap = new WrapMethod(allMethod[data], this.attributes[data]);
                     wrapTemp.setWrap(wrap);
                     wrapTemp = wrap;
                 }
@@ -42,9 +44,8 @@ class Element extends Component {
         }
     }
 
-    validate(){
-        if (this.wrap !== null)
-        {
+    validate() {
+        if (this.wrap !== null) {
             this.wrap.validate(this.value);
         }
     }
