@@ -2,26 +2,25 @@ import Component from './Component.js';
 import Element from './Element.js';
 
 class Form extends Component {
-  constructor(options, validator, form) {
-    super(options, validator);
+  constructor(selector, validator) {
+    super(selector, validator);
     this.elements = [];
-
-    // divide form into element
-    if (form) {
-      for (let i = 0; i < form.length; i++) {
-        this.elements.push(new Element(options, validator, form[i]));
-      }
-    }
   }
 
   retrieve() {
-    // TODO: restore elements
-    return undefined;
+    this.selector.children().each((i, e) => this.elements.push(new Element(e, this.validator)));
   }
 
-  validate(options) {
-    //this.validator.validate(options);
-    for (let element of this.elements) element.validate();
+  performValidate(options) {
+    this.retrieve();
+    this.elements.forEach((element) => element.validate(options));
+  }
+
+  valid() {
+    this.retrieve();
+    const isErrors = [];
+    this.elements.forEach((element) => isErrors.push(!element.valid()));
+    return isErrors.every((error) => error === false);
   }
 }
 

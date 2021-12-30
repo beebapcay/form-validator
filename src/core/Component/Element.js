@@ -1,54 +1,20 @@
 import Component from './Component.js';
 import WrapMethod from './WrapMethod.js';
-import * as allMethod from "../../utils/";
-import {camelize} from "../../utils/camelize.js";
+import * as allMethod from '../../utils/';
+import { camelize } from '../../utils/camelize.js';
 
 class Element extends Component {
-    constructor(options, validator, element) {
-        super(options, validator);
-        this.options = options;
-        this.validator = validator;
-        this.attributes = null;
-        this.wrap = null;
-        this.value = element.value;
+  constructor(selector, validator) {
+    super(selector, validator);
+  }
 
-        // get all attributes in DOM of element and value of this element
-        if (element) {
-            let attributes = {};
-            $.each(element.attributes, function (index) {
-                // attribute names from HTML is saved as lowercase
-                // (eg. 'creditCard' becomes 'creditcard').
-                // therefore, in order to work with the utilities functions (their name are in camelCase),
-                // the attribute name should convert to camelCase.
-                const attr = element.attributes[index];
-                const attrName = camelize(attr.name);
-                // else add this attr to attributes
-                attributes[attrName] = attr.value;
-            });
-            this.attributes = attributes;
-        }
+  performValidate(options) {
+    this.validator.validate(this.selector, options);
+  }
 
-        // need decorator method after if attribute == method name
-        let wrapTemp = null;
-        for (const data in this.attributes) {
-            if (typeof allMethod[data] !== "undefined") {
-                if (this.wrap === null) {
-                    this.wrap = new WrapMethod(allMethod[data], this.attributes[data]);
-                    wrapTemp = this.wrap;
-                } else {
-                    const wrap = new WrapMethod(allMethod[data], this.attributes[data]);
-                    wrapTemp.setWrap(wrap);
-                    wrapTemp = wrap;
-                }
-            }
-        }
-    }
-
-    validate() {
-        if (this.wrap !== null) {
-            this.wrap.validate(this.value);
-        }
-    }
+  performValid(options) {
+    this.validator.valid(this.selector, options);
+  }
 }
 
 export default Element;
