@@ -1,21 +1,20 @@
 class Validator {
-  constructor(wrappee, options, errorTrigger) {
+  constructor(wrappee) {
     this.wrappee = wrappee;
-    this.options = options;
-    this.errorTrigger = errorTrigger;
   }
 
-  validate(selector, options) {
-    this.wrappee.validate(selector, options);
-    return this.performValidate(selector, options);
+  validate(selector, errorTrigger) {
+    console.log('wrappee', this.wrappee);
+    this.wrappee?.validate(selector, errorTrigger);
+    return this.performValidate(selector, errorTrigger);
   }
 
-  performValidate(selector, options) {
+  performValidate(selector, errorTrigger) {
     return undefined;
   }
 
   valid(selector) {
-    this.wrappee.valid(selector);
+    this.wrappee?.valid(selector);
     return this.performValid(selector);
   }
 

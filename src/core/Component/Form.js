@@ -2,18 +2,20 @@ import Component from './Component.js';
 import Element from './Element.js';
 
 class Form extends Component {
-  constructor(selector, validator) {
-    super(selector, validator);
+  constructor(selector, rules) {
+    super(selector, rules);
     this.elements = [];
   }
 
   retrieve() {
-    this.selector.children().each((i, e) => this.elements.push(new Element(e, this.validator)));
+    $(this.selector)
+      .children()
+      .each((i, e) => this.elements.push(new Element(e, this.rules)));
   }
 
-  performValidate(options) {
+  performValidate(errorTrigger) {
     this.retrieve();
-    this.elements.forEach((element) => element.validate(options));
+    this.elements.forEach((element) => element.validate(errorTrigger));
   }
 
   valid() {

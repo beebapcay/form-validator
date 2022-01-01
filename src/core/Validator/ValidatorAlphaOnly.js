@@ -1,17 +1,28 @@
-import Validator from './Validator';
+import Validator from './Validator.js';
 
 class ValidatorAlphaOnly extends Validator {
-  performValidate(selector, options) {
-    const checker = $.data(selector, 'alphaonly');
-    if (!checker) return;
+  constructor(wrappee) {
+    super(wrappee);
+  }
 
-    //valid here & error message
+  performValidate(selector, errorTrigger) {
+    const checker = $.data(selector, 'alphaonly');
+    if (!checker || !selector.is('input')) return;
+
+    const value = selector.val();
+    if (!value.match(/[^a-zA-Z]/)) {
+      errorTrigger.trigger({ message: options.message });
+    }
   }
 
   performValid(selector) {
     const checker = $.data(selector, 'alphaonly');
     if (!checker) return;
 
-    //valid here
+    const value = selector.val();
+    if (value.match(/[^a-zA-Z]/)) return true;
+    return false;
   }
 }
+
+export default ValidatorAlphaOnly;

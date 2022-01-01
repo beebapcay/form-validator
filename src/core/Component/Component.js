@@ -1,26 +1,33 @@
-import Validator from '../Validator/Validator.js';
+import defaultRules from '../Rule/index.js';
+import Rule from '../Rule/Rule.js';
 
 class Component {
-  constructor(selector, validator) {
+  constructor(selector, rules) {
     this.selector = selector;
-    this.validator = validator;
+    this.rules = defaultRules;
+
+    rules?.forEach((rule) => {
+      const existRule = this.rules.find((r) => r.name === rule.name);
+      if (existRule) existRule.update(rule.message);
+      else this.rules.push(new Rule(rule.name, rule.validator, rule.message));
+    });
   }
 
   setup() {
-    if (!selector) {
+    if (!this.selector) {
       console.warn("Nothing selected, can't validate, returning nothing.");
       return;
     }
 
-    selector.atrr('novalidate', 'novalidate');
+    $(this.selector).attr('novalidate', 'novalidate');
   }
 
-  validate(options) {
+  validate(errorTrigger) {
     this.setup();
-    return this.performValidate(options);
+    return this.performValidate(errorTrigger);
   }
 
-  performValidate(options) {
+  performValidate(errorTrigger) {
     return undefined;
   }
 

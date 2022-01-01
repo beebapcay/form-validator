@@ -5,24 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="module" src="./index.js"></script>
     <title>Document</title>
   </head>
   <body>
-    <ol id="list">
-      <li>1</li>
-      <li>2</li>
-      <li>3</li>
-    </ol>
+    <form id="form">
+      <input type="text" id="input" data-alphaonly data-require />
+      <p id="for-input">abc</p>
+    </form>
 
     <div id="info"></div>
-
-    <script>
-      const list = $('#list');
-      const s = [];
-      list.children().each(function (i, e) {
-        s.push($(e));
-      });
-      $('#info').html(JSON.stringify(s));
-    </script>
   </body>
 </html>
