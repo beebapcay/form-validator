@@ -1,31 +1,35 @@
 import Component from './Component.js';
-import Validator from '../Validator/Validator.js';
 
 class Element extends Component {
   constructor(selector, rules) {
     super(selector, rules);
 
-    this.validator = [];
+    this.validator = null;
 
+    var wrapTemp = null;
     const checkers = $(this.selector).data();
     Object.entries(checkers).forEach(([key, value]) => {
       const a = rules.find((rule) => rule.name === key);
       const validator = a?.validator;
       if (!validator) return false;
-      this.validator.push(new validator(a));
+      if (this.validator === null)
+      {
+          this.validator = new validator(a);
+          wrapTemp = this.validator;
+      } else{
+          const wrap = new validator(a);
+          wrapTemp.setWrap(wrap);
+          wrapTemp = wrap;
+      }
     });
   }
 
   performValidate(errorTrigger) {
-    this.validator.forEach(validator => {
-      validator?.validate(this.selector, errorTrigger);
-    });
+    this.validator?.validate(this.selector, errorTrigger);
   }
 
   performValid() {
-    this.validator.forEach(validator => {
-      validator?.valid(this.selector, errorTrigger);
-    });
+    this.validator?.valid(this.selector, errorTrigger);
   }
 }
 

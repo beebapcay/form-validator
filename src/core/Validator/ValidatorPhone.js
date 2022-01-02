@@ -1,8 +1,8 @@
 import Validator from './Validator.js';
 
 class ValidatorPhone extends Validator {
-  constructor(wrappee) {
-    super(wrappee);
+  constructor(rule) {
+    super(rule);
     this.regexPattern = /^([\+][0-9]{4}|[0-9]{3})?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/g;
   }
 
@@ -11,7 +11,7 @@ class ValidatorPhone extends Validator {
     
     const value = selector.value;
     if (!value.match(this.regexPattern)) {
-      errorTrigger.trigger({ message: this.wrappee.message });
+      errorTrigger.trigger({ message: this.rule.message });
     }
   }
 

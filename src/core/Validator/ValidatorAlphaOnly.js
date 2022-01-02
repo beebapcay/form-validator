@@ -1,8 +1,8 @@
 import Validator from './Validator.js';
 
 class ValidatorAlphaOnly extends Validator {
-  constructor(wrappee) {
-    super(wrappee);
+  constructor(rule) {
+    super(rule);
     this.regexPattern = /[^a-zA-Z]/;
   }
 
@@ -11,7 +11,7 @@ class ValidatorAlphaOnly extends Validator {
 
     const value = selector.value;
     if (!value.match(this.regexPattern)) {
-      errorTrigger.trigger({ message: this.wrappee.message});
+      errorTrigger.trigger({ message: this.rule.message});
     }
   }
 

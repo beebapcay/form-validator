@@ -1,8 +1,8 @@
 import Validator from './Validator.js';
 
 class ValidatorDate extends Validator {
-  constructor(wrappee) {
-    super(wrappee);
+  constructor(rule) {
+    super(rule);
   }
 
   performValidate(selector, errorTrigger) {
@@ -10,7 +10,7 @@ class ValidatorDate extends Validator {
     
     const value = selector.value;
     if (isNaN(new Date(value))) {
-      errorTrigger.trigger({ message: this.wrappee.message});
+      errorTrigger.trigger({ message: this.rule.message});
     }
   }
 

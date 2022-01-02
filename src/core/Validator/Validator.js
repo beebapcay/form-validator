@@ -1,9 +1,15 @@
 class Validator {
-  constructor(wrappee) {
+  constructor(rule) {
+    this.rule = rule;
+    this.wrappee = null;
+  }
+
+  setWrap(wrappee){
     this.wrappee = wrappee;
   }
 
   validate(selector, errorTrigger) {
+    this.wrappee?.validate(selector, errorTrigger);
     return this.performValidate(selector, errorTrigger);
   }
 
