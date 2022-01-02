@@ -4,8 +4,6 @@ class Validator {
   }
 
   validate(selector, errorTrigger) {
-    console.log('wrappee', this.wrappee);
-    this.wrappee?.validate(selector, errorTrigger);
     return this.performValidate(selector, errorTrigger);
   }
 

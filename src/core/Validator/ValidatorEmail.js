@@ -1,17 +1,17 @@
 import Validator from './Validator.js';
 
-class ValidatorAlphaOnly extends Validator {
+class ValidatorEmail extends Validator {
   constructor(wrappee) {
     super(wrappee);
-    this.regexPattern = /[^a-zA-Z]/;
+    this.regexPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
   }
 
   performValidate(selector, errorTrigger) {
     if (!(selector.nodeName === 'INPUT')) return;
-
+    
     const value = selector.value;
     if (!value.match(this.regexPattern)) {
-      errorTrigger.trigger({ message: this.wrappee.message});
+      errorTrigger.trigger({ message: this.wrappee.message });
     }
   }
 
@@ -24,4 +24,4 @@ class ValidatorAlphaOnly extends Validator {
   }
 }
 
-export default ValidatorAlphaOnly;
+export default ValidatorEmail;

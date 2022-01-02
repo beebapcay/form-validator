@@ -1,16 +1,15 @@
 import Validator from './Validator.js';
 
-class ValidatorAlphaOnly extends Validator {
+class ValidatorDate extends Validator {
   constructor(wrappee) {
     super(wrappee);
-    this.regexPattern = /[^a-zA-Z]/;
   }
 
   performValidate(selector, errorTrigger) {
     if (!(selector.nodeName === 'INPUT')) return;
-
+    
     const value = selector.value;
-    if (!value.match(this.regexPattern)) {
+    if (isNaN(new Date(value))) {
       errorTrigger.trigger({ message: this.wrappee.message});
     }
   }
@@ -19,9 +18,9 @@ class ValidatorAlphaOnly extends Validator {
     if (!(selector.nodeName === 'INPUT')) return;
     
     const value = selector.value;
-    if (value.match(this.regexPattern)) return true;
+    if (!isNaN(new Date(value))) return true;
     return false;
   }
 }
 
-export default ValidatorAlphaOnly;
+export default ValidatorDate;

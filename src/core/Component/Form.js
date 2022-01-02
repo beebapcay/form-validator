@@ -8,6 +8,7 @@ class Form extends Component {
   }
 
   retrieve() {
+    if (this.elements.length !== 0) return;
     $(this.selector)
       .children()
       .each((i, e) => this.elements.push(new Element(e, this.rules)));
@@ -16,6 +17,16 @@ class Form extends Component {
   performValidate(errorTrigger) {
     this.retrieve();
     this.elements.forEach((element) => element.validate(errorTrigger));
+  }
+
+  validate(errorTrigger){
+    this.setup();
+    // add onsubmit event listen
+    const context = this;
+    this.selector[0].addEventListener("submit",function(event){
+      event.preventDefault();
+      context.performValidate(errorTrigger);
+    }, true);
   }
 
   valid() {
