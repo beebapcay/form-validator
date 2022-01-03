@@ -16,11 +16,10 @@ class ValidatorPost extends Validator {
   }
 
   performValid(selector) {
-    if (!(selector.nodeName === 'INPUT')) return;
+    if (!(selector.nodeName === 'INPUT')) return false;
     
     const value = selector.value;
-    if (value.match(this.regexPattern)) return true;
-    return false;
+    return !!value.match(this.regexPattern);
   }
 }
 

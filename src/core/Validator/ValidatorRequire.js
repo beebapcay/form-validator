@@ -15,11 +15,10 @@ class ValidatorRequire extends Validator {
   }
 
   performValid(selector) {
-    if (!(selector.nodeName === 'INPUT')) return;
+    if (!(selector.nodeName === 'INPUT')) return false;
     
     const value = selector.value;
-    if (value) return true;
-    return false;
+    return !!value;
   }
 }
 

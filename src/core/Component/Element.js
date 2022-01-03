@@ -12,14 +12,13 @@ class Element extends Component {
       const a = rules.find((rule) => rule.name === key);
       const validator = a?.validator;
       if (!validator) return false;
-      if (this.validator === null)
-      {
-          this.validator = new validator(a);
-          wrapTemp = this.validator;
-      } else{
-          const wrap = new validator(a);
-          wrapTemp.setWrap(wrap);
-          wrapTemp = wrap;
+      if (this.validator === null) {
+        this.validator = new validator(a);
+        wrapTemp = this.validator;
+      } else {
+        const wrap = new validator(a);
+        wrapTemp.setWrap(wrap);
+        wrapTemp = wrap;
       }
     });
   }
@@ -29,7 +28,9 @@ class Element extends Component {
   }
 
   performValid() {
-    this.validator?.valid(this.selector, errorTrigger);
+    // ignore elements that do not have validators
+    if (!this.validator) return true
+    return this.validator?.valid(this.selector);
   }
 }
 

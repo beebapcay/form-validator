@@ -18,8 +18,12 @@ class Validator {
   }
 
   valid(selector) {
-    this.wrappee?.valid(selector);
-    return this.performValid(selector);
+    let validWrappee = true
+    if (this.wrappee) {
+      validWrappee = this.wrappee?.valid(selector);
+    }
+
+    return validWrappee && this.performValid(selector);
   }
 
   performValid(selector) {
