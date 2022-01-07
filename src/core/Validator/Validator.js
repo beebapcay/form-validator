@@ -8,6 +8,10 @@ class Validator {
     this.wrappee = wrappee;
   }
 
+  setAgrument(argument){
+    this.argument = argument;
+  }
+
   validate(selector, errorTrigger) {
     this.wrappee?.validate(selector, errorTrigger);
     return this.performValidate(selector, errorTrigger);

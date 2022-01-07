@@ -5,6 +5,7 @@ class Element extends Component {
     super(selector, rules);
 
     this.validator = null;
+    this.haveRequire = false;
 
     var wrapTemp = null;
     const checkers = $(this.selector).data();
@@ -12,6 +13,18 @@ class Element extends Component {
       const a = rules.find((rule) => rule.name === key);
       const validator = a?.validator;
       if (!validator) return false;
+
+      // sure that require is the first wrap
+      if (a.name === "require"){
+        this.haveRequire = true;
+        const wrap = new validator(a);
+        wrap.setWrap(this.validator);
+        this.validator = wrap;
+        if (wrapTemp === null)
+            wrapTemp = this.validator;
+        return false;
+      }
+
       if (this.validator === null) {
         this.validator = new validator(a);
         wrapTemp = this.validator;
@@ -20,10 +33,12 @@ class Element extends Component {
         wrapTemp.setWrap(wrap);
         wrapTemp = wrap;
       }
+      wrapTemp.setAgrument(value);
     });
   }
 
   performValidate(errorTrigger) {
+    if (this.haveRequire === false && this.selector.value === "") return;
     this.validator?.validate(this.selector, errorTrigger);
   }
 

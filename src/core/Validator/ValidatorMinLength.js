@@ -1,24 +1,16 @@
 import Validator from './Validator.js';
 
-class ValidatorRequire extends Validator {
+class ValidatorMinLength extends Validator {
   constructor(rule) {
     super(rule);
   }
 
-  validate(selector, errorTrigger) {
-    const value = selector.value;
-    if (value !== "")
-    {
-       this.wrappee?.validate(selector, errorTrigger);
-    }
-    return this.performValidate(selector, errorTrigger);
-  }
-
   performValidate(selector, errorTrigger) {
     if (!(selector.nodeName === 'INPUT')) return;
-
+    
     const value = selector.value;
-    if (!value) {
+    const min = parseInt(this.argument);
+    if (!(value.length >= min)) {
       errorTrigger.trigger({ message: this.rule.message });
     }
   }
@@ -27,8 +19,8 @@ class ValidatorRequire extends Validator {
     if (!(selector.nodeName === 'INPUT')) return false;
     
     const value = selector.value;
-    return !!value;
+    return value.length >= min;
   }
 }
 
-export default ValidatorRequire;
+export default ValidatorMinLength;

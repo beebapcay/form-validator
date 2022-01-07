@@ -1,24 +1,16 @@
 import Validator from './Validator.js';
 
-class ValidatorRequire extends Validator {
+class ValidatorTime24 extends Validator {
   constructor(rule) {
     super(rule);
-  }
-
-  validate(selector, errorTrigger) {
-    const value = selector.value;
-    if (value !== "")
-    {
-       this.wrappee?.validate(selector, errorTrigger);
-    }
-    return this.performValidate(selector, errorTrigger);
+    this.regexPattern = /^(?:0?\d|1\d|2[0-3]):(?:[0-5]\d)$/;
   }
 
   performValidate(selector, errorTrigger) {
     if (!(selector.nodeName === 'INPUT')) return;
-
+    
     const value = selector.value;
-    if (!value) {
+    if (!value.match(this.regexPattern)) {
       errorTrigger.trigger({ message: this.rule.message });
     }
   }
@@ -27,8 +19,8 @@ class ValidatorRequire extends Validator {
     if (!(selector.nodeName === 'INPUT')) return false;
     
     const value = selector.value;
-    return !!value;
+    return !!value.match(this.regexPattern);
   }
 }
 
-export default ValidatorRequire;
+export default ValidatorTime24;

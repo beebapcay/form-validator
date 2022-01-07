@@ -1,34 +1,26 @@
 import Validator from './Validator.js';
 
-class ValidatorRequire extends Validator {
+class ValidatorMaxLength extends Validator {
   constructor(rule) {
     super(rule);
-  }
-
-  validate(selector, errorTrigger) {
-    const value = selector.value;
-    if (value !== "")
-    {
-       this.wrappee?.validate(selector, errorTrigger);
-    }
-    return this.performValidate(selector, errorTrigger);
   }
 
   performValidate(selector, errorTrigger) {
     if (!(selector.nodeName === 'INPUT')) return;
 
     const value = selector.value;
-    if (!value) {
+    const max = parseInt(this.argument);
+    if (!(value.length <= max)) {
       errorTrigger.trigger({ message: this.rule.message });
     }
   }
 
   performValid(selector) {
     if (!(selector.nodeName === 'INPUT')) return false;
-    
+
     const value = selector.value;
-    return !!value;
+    return value.length <= max;
   }
 }
 
-export default ValidatorRequire;
+export default ValidatorMaxLength;
