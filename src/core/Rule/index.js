@@ -13,6 +13,10 @@ const rules = [
   new Rule('maxlength', validator.maxlength, 'The value must have length smaller than max length'),
   new Rule('time12', validator.time12, 'The value must be time between 00:00AM to 12:59PM'),
   new Rule('time24', validator.time24, 'The value must be time between 00:00 to 23:59'),
+  new Rule('ipv4', validator.ipv4, 'The value must be in IPvV4 format'),
+  new Rule('ipv6', validator.ipv6, 'The value must be in IPvV6 format'),
+  new Rule('nowhitespace', validator.nowhitespace, 'The value must not contain any whitespace'),
+  new Rule('numberonly', validator.numberonly, 'The value must contain numbers only'),
 ];
 
 

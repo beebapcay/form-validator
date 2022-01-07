@@ -9,6 +9,10 @@ import ValidatorMinLength from './ValidatorMinLength.js'
 import ValidatorMaxLength from './ValidatorMaxLength.js'
 import ValidatorTime12 from './ValidatorTime12.js';
 import ValidatorTime24 from './ValidatorTime24.js';
+import ValidatorIPV4 from "./ValidatorIPV4";
+import ValidatorIPV6 from "./ValidatorIPV6";
+import ValidatorNoWhiteSpace from "./ValidatorNoWhiteSpace";
+import ValidatorNumberOnly from "./ValidatorNumberOnly";
 
 export const validator = {
   alphaonly: ValidatorAlphaOnly,
@@ -22,6 +26,10 @@ export const validator = {
   maxlength: ValidatorMaxLength,
   time12: ValidatorTime12,
   time24: ValidatorTime24,
+  ipv4: ValidatorIPV4,
+  ipv6: ValidatorIPV6,
+  nowhitespace: ValidatorNoWhiteSpace,
+  numberonly: ValidatorNumberOnly,
 };
 
 export default validator;

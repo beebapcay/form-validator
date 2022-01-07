@@ -1,3 +1,5 @@
+export const REGEX_NUMBER_ONLY = /^\d+$/i
+
 /**
  * Return true when the given string (value) is not empty & contains
  * only numbers.
@@ -6,6 +8,5 @@
  * @return {boolean}
  */
 export function numberOnly(value) {
-    const pattern = /^\d+$/i
-    return pattern.test(value)
+  return REGEX_NUMBER_ONLY.test(value)
 }
