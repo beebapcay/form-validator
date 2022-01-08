@@ -5,8 +5,12 @@ class Rule {
     this.message = message;
   }
 
-  update(message) {
+  updateMessage(message) {
     this.message = message;
+  }
+
+  updateValidator(validator) {
+    this.validator = validator;
   }
 }
 
