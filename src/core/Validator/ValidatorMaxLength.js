@@ -10,8 +10,8 @@ class ValidatorMaxLength extends Validator {
     if (!(selector.nodeName === 'INPUT')) return;
 
     const value = selector.value;
-    const max = parseInt(this.argument);
-    if (!(value.length <= max)) {
+    // const max = parseInt(this.argument);
+    if (!this.check(value)) {
       errorTrigger.trigger(new Error(selector, this.rule.message, value));
     }
   }
@@ -20,8 +20,7 @@ class ValidatorMaxLength extends Validator {
     if (!(selector.nodeName === 'INPUT')) return false;
 
     const value = selector.value;
-    const max = parseInt(this.argument);
-    return value.length <= max;
+    return this.check(value);
   }
 
   check(value) {
