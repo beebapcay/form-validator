@@ -37,6 +37,7 @@
       <input
         type="text"
         id="date-of-birth"
+        name="date-of-birth"
         aria-label="Date of birth"
         placeholder="yyyy/mm/dd"
         data-date
@@ -55,13 +56,13 @@
       />
 
       <label for="phone">Phone number</label>
-      <input type="text" id="phone" aria-label="Phone number" data-phone data-require />
+      <input type="text" id="phone" name="phone" aria-label="Phone number" data-phone data-require />
 
       <label for="phone">URL</label>
-      <input type="text" id="url" aria-label="URL" data-url data-require />
+      <input type="text" id="url" name="url" aria-label="URL" data-url data-require />
 
       <label for="text">Text</label>
-      <input type="text" id="text" aria-label="text" data-minlength="2" />
+      <input type="text" id="text" name="text" aria-label="text" data-minlength="2" />
 
       <!--  <p data-date>abc</p>-->
       <button type="submit">Submit</button>

@@ -4,7 +4,7 @@ import validator from '../Validator/ValidatorMap.js';
 const rules = [
   new Rule('alphaonly', validator.alphaonly, 'Only alphabets are allowed.'),
   new Rule('date', validator.date, 'The value must be date type yyyy/mm/dd'),
-  new Rule('require', validator.require, "The value must have value"),
+  new Rule('require', validator.require, "This field must have a value"),
   new Rule('email', validator.email, 'The value must be email'),
   new Rule('post', validator.require, 'The value must be post code type 12345 or 12345-1234 or 12345-12345 or 123456 or 123456-123456'),
   new Rule('phone', validator.phone, 'The value must be phone type +84723832106, 0723837106, 072-383-7106'),

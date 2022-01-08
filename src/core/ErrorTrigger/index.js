@@ -3,6 +3,7 @@ import ErrorTriggerDecorator from './ErrorTriggerDecorator.js';
 import ErrorTriggerByDom from './ErrorTriggerByDom.js';
 import ErrorTriggerByLog from './ErrorTriggerByLog.js';
 import ErrorTriggerByAlert from './ErrorTriggerByAlert.js';
+import Error from './Error.js';
 
 export default class ErrorTriggerFactory {
   createErrorTriggerByDom(context, wrappee) {
@@ -18,4 +19,11 @@ export default class ErrorTriggerFactory {
   }
 }
 
-export { ErrorTrigger, ErrorTriggerDecorator, ErrorTriggerByDom, ErrorTriggerByLog, ErrorTriggerByAlert };
+export {
+  ErrorTrigger,
+  ErrorTriggerDecorator,
+  ErrorTriggerByDom,
+  ErrorTriggerByLog,
+  ErrorTriggerByAlert,
+  Error
+};

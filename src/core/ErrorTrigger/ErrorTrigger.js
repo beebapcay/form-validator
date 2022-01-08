@@ -3,6 +3,10 @@ class ErrorTrigger {
     this.context = context;
   }
 
+  setContext(context) {
+    this.context = context;
+  }
+
   triggerAction(error) {
     return undefined;
   }

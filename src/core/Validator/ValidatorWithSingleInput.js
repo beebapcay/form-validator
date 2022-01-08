@@ -1,6 +1,7 @@
 import Validator from './Validator.js';
+import {Error} from "../ErrorTrigger";
 
-class ValidatorIPV4 extends Validator {
+class ValidatorWithSimpleInput extends Validator {
 
   constructor(rule, regexPattern) {
     super(rule);
@@ -12,7 +13,11 @@ class ValidatorIPV4 extends Validator {
 
     const value = selector.value;
     if (!value.match(this.regexPattern)) {
-      errorTrigger.trigger({message: this.rule.message});
+      errorTrigger.trigger(new Error(
+        selector,
+        this.rule.message,
+        value,
+      ));
     }
   }
 
@@ -24,4 +29,4 @@ class ValidatorIPV4 extends Validator {
   }
 }
 
-export default ValidatorIPV4;
+export default ValidatorWithSimpleInput;

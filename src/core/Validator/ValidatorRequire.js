@@ -1,4 +1,5 @@
 import Validator from './Validator.js';
+import {Error} from "../ErrorTrigger";
 
 class ValidatorRequire extends Validator {
   constructor(rule) {
@@ -19,13 +20,16 @@ class ValidatorRequire extends Validator {
 
     const value = selector.value;
     if (!value) {
-      errorTrigger.trigger({ message: this.rule.message });
+      errorTrigger.trigger(new Error(
+        selector,
+        this.rule.message,
+      ));
     }
   }
 
   performValid(selector) {
     if (!(selector.nodeName === 'INPUT')) return false;
-    
+
     const value = selector.value;
     return !!value;
   }

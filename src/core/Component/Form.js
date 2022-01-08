@@ -21,6 +21,10 @@ class Form extends Component {
 
   validate(errorTrigger) {
     this.setup();
+    // set the selector for error trigger
+    if (errorTrigger) {
+      errorTrigger.setContext(this.selector);
+    }
     // add onsubmit event listen
     const context = this;
     this.selector[0].addEventListener(
