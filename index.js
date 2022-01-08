@@ -1,5 +1,6 @@
 import Form from './src/core/Component/Form.js';
 import ErrorTriggerByDom from './src/core/ErrorTrigger/ErrorTriggerByDom.js';
+import ErrorTriggerByAlert from './src/core/ErrorTrigger/ErrorTriggerByAlert.js';
 import Rule from './src/core/Rule/Rule.js';
 
 const form = new Form($('#form'), [
@@ -8,7 +9,7 @@ const form = new Form($('#form'), [
   new Rule('require', null, 'このフィールドは必須です'),
 ]);
 
-form.validate(new ErrorTriggerByDom());
+form.validate(new ErrorTriggerByAlert());
 $(document).ready(() => {
   $('#valid').on('click', (e) => {
     e.preventDefault();

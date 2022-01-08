@@ -1,7 +1,7 @@
 import { REGEX_NO_WHITESPACE } from '../../utils/index.js';
-import ValidatorWithSingleInput from './ValidatorWithSingleInput.js';
+import ValidatorExpression from './ValidatorExpression.js';
 
-class ValidatorNoWhiteSpace extends ValidatorWithSingleInput {
+class ValidatorNoWhiteSpace extends ValidatorExpression {
   constructor(rule) {
     super(rule, REGEX_NO_WHITESPACE);
   }

@@ -1,7 +1,7 @@
 import { REGEX_IPV4 } from '../../utils/index.js';
-import ValidatorWithSingleInput from './ValidatorWithSingleInput.js';
+import ValidatorExpression from './ValidatorExpression.js';
 
-class ValidatorIPV4 extends ValidatorWithSingleInput {
+class ValidatorIPV4 extends ValidatorExpression {
   constructor(rule) {
     super(rule, REGEX_IPV4);
   }
