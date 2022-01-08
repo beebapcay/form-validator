@@ -1,9 +1,10 @@
 import Rule from '../Rule/Rule.js';
 
 class Component {
-  constructor(selector, rules) {
+  constructor(selector, rules, options = 'simple') {
     this.selector = selector;
     this.rules = rules;
+    this.options = options; // simple | debug
   }
 
   setup() {

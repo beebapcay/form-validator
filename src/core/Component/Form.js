@@ -4,10 +4,8 @@ import defaultRules from '../Rule/index.js';
 import Rule from '../Rule/Rule.js';
 
 class Form extends Component {
-  constructor(selector, rules, options = 'simple') {
-    super(selector, rules);
-
-    this.options = options; // simple | debug
+  constructor(selector, rules, options) {
+    super(selector, rules, options);
 
     this.rules = defaultRules;
 
@@ -26,7 +24,7 @@ class Form extends Component {
     if (this.elements.length !== 0) return;
     $(this.selector)
       .children()
-      .each((i, e) => this.elements.push(new Element(e, this.rules)));
+      .each((i, e) => this.elements.push(new Element(e, this.rules, this.options)));
   }
 
   performValidate(errorTrigger) {
