@@ -1,10 +1,11 @@
 import Validator from './Validator.js';
-import {Error} from "../ErrorTrigger";
+import { Error } from '../ErrorTrigger';
 
 class ValidatorUrl extends Validator {
   constructor(rule) {
     super(rule);
-    this.regexPattern = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
+    this.regexPattern =
+      /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
   }
 
   performValidate(selector, errorTrigger) {
@@ -12,11 +13,7 @@ class ValidatorUrl extends Validator {
 
     const value = selector.value;
     if (!value.match(this.regexPattern)) {
-      errorTrigger.trigger(new Error(
-        selector,
-        this.rule.message,
-        value,
-      ));
+      errorTrigger.trigger(new Error(selector, this.rule.message, value));
     }
   }
 
@@ -25,6 +22,10 @@ class ValidatorUrl extends Validator {
 
     const value = selector.value;
     return !!value.match(this.regexPattern);
+  }
+
+  check(value) {
+    return value.match(this.regexPattern);
   }
 }
 

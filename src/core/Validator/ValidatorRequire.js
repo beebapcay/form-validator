@@ -1,5 +1,5 @@
 import Validator from './Validator.js';
-import {Error} from "../ErrorTrigger";
+import { Error } from '../ErrorTrigger';
 
 class ValidatorRequire extends Validator {
   constructor(rule) {
@@ -8,9 +8,8 @@ class ValidatorRequire extends Validator {
 
   validate(selector, errorTrigger) {
     const value = selector.value;
-    if (value !== "")
-    {
-       this.wrappee?.validate(selector, errorTrigger);
+    if (value !== '') {
+      this.wrappee?.validate(selector, errorTrigger);
     }
     return this.performValidate(selector, errorTrigger);
   }
@@ -20,10 +19,7 @@ class ValidatorRequire extends Validator {
 
     const value = selector.value;
     if (!value) {
-      errorTrigger.trigger(new Error(
-        selector,
-        this.rule.message,
-      ));
+      errorTrigger.trigger(new Error(selector, this.rule.message));
     }
   }
 
@@ -31,6 +27,10 @@ class ValidatorRequire extends Validator {
     if (!(selector.nodeName === 'INPUT')) return false;
 
     const value = selector.value;
+    return !!value;
+  }
+
+  check(value) {
     return !!value;
   }
 }

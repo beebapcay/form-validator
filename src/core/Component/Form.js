@@ -3,8 +3,10 @@ import Element from './Element.js';
 import defaultRules from '../Rule/index.js';
 
 class Form extends Component {
-  constructor(selector, rules) {
+  constructor(selector, rules, options = 'simple') {
     super(selector, rules);
+
+    this.options = options; // simple | debug
 
     this.rules = defaultRules;
 

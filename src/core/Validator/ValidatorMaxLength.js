@@ -1,5 +1,5 @@
 import Validator from './Validator.js';
-import {Error} from "../ErrorTrigger";
+import { Error } from '../ErrorTrigger';
 
 class ValidatorMaxLength extends Validator {
   constructor(rule) {
@@ -12,11 +12,7 @@ class ValidatorMaxLength extends Validator {
     const value = selector.value;
     const max = parseInt(this.argument);
     if (!(value.length <= max)) {
-      errorTrigger.trigger(new Error(
-        selector,
-        this.rule.message,
-        value,
-      ));
+      errorTrigger.trigger(new Error(selector, this.rule.message, value));
     }
   }
 
@@ -24,6 +20,11 @@ class ValidatorMaxLength extends Validator {
     if (!(selector.nodeName === 'INPUT')) return false;
 
     const value = selector.value;
+    const max = parseInt(this.argument);
+    return value.length <= max;
+  }
+
+  check(value) {
     const max = parseInt(this.argument);
     return value.length <= max;
   }

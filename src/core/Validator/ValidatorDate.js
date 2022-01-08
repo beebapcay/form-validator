@@ -1,5 +1,5 @@
 import Validator from './Validator.js';
-import {Error} from "../ErrorTrigger";
+import { Error } from '../ErrorTrigger';
 
 class ValidatorDate extends Validator {
   constructor(rule) {
@@ -9,14 +9,10 @@ class ValidatorDate extends Validator {
 
   performValidate(selector, errorTrigger) {
     if (!(selector.nodeName === 'INPUT')) return;
-    
+
     const value = selector.value;
     if (!value.match(this.regexPattern)) {
-      errorTrigger.trigger(new Error(
-        selector,
-        this.rule.message,
-        value,
-      ));
+      errorTrigger.trigger(new Error(selector, this.rule.message, value));
     }
   }
 
@@ -25,6 +21,10 @@ class ValidatorDate extends Validator {
 
     const value = selector.value;
     return !!value.match(this.regexPattern);
+  }
+
+  check(value) {
+    return value.match(this.regexPattern);
   }
 }
 

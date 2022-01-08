@@ -1,7 +1,8 @@
 class Validator {
-  constructor(rule) {
+  constructor(rule, options) {
     this.rule = rule;
     this.wrappee = null;
+    this.options = options;
   }
 
   setWrap(wrappee) {
@@ -13,8 +14,9 @@ class Validator {
   }
 
   validate(selector, errorTrigger) {
-    this.wrappee?.validate(selector, errorTrigger);
-    return this.performValidate(selector, errorTrigger);
+    this.performValidate(selector, errorTrigger);
+    if ((options === 'simple' && this.check(selector.value)) || options === 'monitor')
+      this.wrappee?.validate(selector, errorTrigger);
   }
 
   performValidate(selector, errorTrigger) {
@@ -31,6 +33,10 @@ class Validator {
   }
 
   performValid(selector) {
+    return undefined;
+  }
+
+  check(value) {
     return undefined;
   }
 }
