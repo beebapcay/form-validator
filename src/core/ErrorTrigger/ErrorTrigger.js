@@ -12,6 +12,10 @@ class ErrorTrigger {
     return undefined;
   }
 
+  triggerAction2(){
+    return undefined;
+  }
+
   trigger(error) {
     return undefined;
   }
