@@ -1,7 +1,7 @@
 import { REGEX_NUMBER_ONLY } from '../../utils/index.js';
-import ValidatorWithSingleInput from './ValidatorWithSingleInput.js';
+import ValidatorExpression from './ValidatorExpression.js';
 
-class ValidatorNumberOnly extends ValidatorWithSingleInput {
+class ValidatorNumberOnly extends ValidatorExpression {
   constructor(rule) {
     super(rule, REGEX_NUMBER_ONLY);
   }

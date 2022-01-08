@@ -1,6 +1,7 @@
 import Component from './Component.js';
 import Element from './Element.js';
 import defaultRules from '../Rule/index.js';
+import Rule from '../Rule/Rule.js';
 
 class Form extends Component {
   constructor(selector, rules, options = 'simple') {
@@ -13,8 +14,8 @@ class Form extends Component {
     rules?.forEach((rule) => {
       const existRule = this.rules.find((r) => r.name === rule.name);
       if (existRule) {
-        if (rule.validator) existRule.validator = rule.validator;
-        if (rule.message) existRule.message = rule.message;
+        if (rule.validator) existRule.updateValidator(rule.validator);
+        if (rule.message) existRule.updateMessage(rule.message);
       } else this.rules.push(new Rule(rule.name, rule.validator, rule.message));
     });
 

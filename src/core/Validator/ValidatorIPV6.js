@@ -1,9 +1,9 @@
 import { REGEX_IPV6 } from '../../utils/index.js';
-import ValidatorWithSingleInput from './ValidatorWithSingleInput.js';
+import ValidatorExpression from './ValidatorExpression.js';
 
-class ValidatorIPV6 extends ValidatorWithSingleInput {
-  constructor(rule) {
-    super(rule, REGEX_IPV6);
+class ValidatorIPV6 extends ValidatorExpression {
+  constructor(rule, options) {
+    super(rule, options, REGEX_IPV6);
   }
 }
 

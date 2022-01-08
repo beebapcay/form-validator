@@ -1,5 +1,5 @@
 import Validator from './Validator.js';
-import { Error } from '../ErrorTrigger';
+import { Error } from '../ErrorTrigger/index.js';
 
 class ValidatorMinLength extends Validator {
   constructor(rule) {
@@ -11,7 +11,7 @@ class ValidatorMinLength extends Validator {
 
     const value = selector.value;
     const min = parseInt(this.argument);
-    if (!(value.length >= min)) {
+    if (!this.check(value)) {
       errorTrigger.trigger(new Error(selector, this.rule.message, value));
     }
   }
@@ -25,7 +25,7 @@ class ValidatorMinLength extends Validator {
   }
 
   check(value) {
-    const min = parseInt(this.argument);
+    const min = parseInt(value);
     return value.length >= min;
   }
 }

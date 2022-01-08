@@ -1,9 +1,9 @@
 import Validator from './Validator.js';
-import { Error } from '../ErrorTrigger';
+import { Error } from '../ErrorTrigger/index.js';
 
-class ValidatorWithSimpleInput extends Validator {
-  constructor(rule, regexPattern) {
-    super(rule);
+class ValidatorExpression extends Validator {
+  constructor(rule, options, regexPattern) {
+    super(rule, options);
     this.regexPattern = regexPattern;
   }
 
@@ -28,4 +28,4 @@ class ValidatorWithSimpleInput extends Validator {
   }
 }
 
-export default ValidatorWithSimpleInput;
+export default ValidatorExpression;
