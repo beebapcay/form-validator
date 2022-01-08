@@ -20,8 +20,7 @@ class ValidatorMinLength extends Validator {
     if (!(selector.nodeName === 'INPUT')) return false;
 
     const value = selector.value;
-    const min = parseInt(this.argument);
-    return value.length >= min;
+    return this.check(value);
   }
 
   check(value) {

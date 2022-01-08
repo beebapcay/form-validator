@@ -2,14 +2,36 @@ import Form from './src/core/Component/Form.js';
 import ErrorTriggerByDom from './src/core/ErrorTrigger/ErrorTriggerByDom.js';
 import ErrorTriggerByAlert from './src/core/ErrorTrigger/ErrorTriggerByAlert.js';
 import Rule from './src/core/Rule/Rule.js';
+import Validator from "./src/core/Validator/Validator.js";
+import {Error} from "./src/core/ErrorTrigger";
+
+// Add a custom rule by extending Validator class
+class CustomValidator extends Validator {
+  performValidate(selector, errorTrigger) {
+    if (!(selector.nodeName === 'INPUT')) return;
+
+    const value = selector.value;
+    if (!(value === 'ABC')) {
+      errorTrigger.trigger(new Error(selector, this.rule.message, value));
+    }
+  }
+
+  performValid(selector) {
+    if (!(selector.nodeName === 'INPUT')) return false;
+
+    const value = selector.value;
+    return value === 'ABC';
+  }
+}
 
 const form = new Form($('#form'), [
   new Rule('email', null, 'メールを入力してください'),
   new Rule('phone', null, '電話番号を入力してください'),
   new Rule('require', null, 'このフィールドは必須です'),
+  new Rule('abc', CustomValidator, 'Type "ABC" to pass this'),
 ]);
 
-form.validate(new ErrorTriggerByAlert());
+form.validate(new ErrorTriggerByDom());
 $(document).ready(() => {
   $('#valid').on('click', (e) => {
     e.preventDefault();

@@ -10,7 +10,7 @@ class Element extends Component {
     var wrapTemp = null;
     const checkers = $(this.selector).data();
     Object.entries(checkers).forEach(([key, value]) => {
-      const a = rules.find((rule) => rule.name === key);
+      const a = this.rules.find((rule) => rule.name === key);
       const validator = a?.validator;
       if (!validator) return false;
 
