@@ -15,7 +15,7 @@ class Validator {
 
   validate(selector, errorTrigger) {
     this.performValidate(selector, errorTrigger);
-    if ((options === 'simple' && this.check(selector.value)) || options === 'monitor')
+    if ((this.options === 'simple' && this.check(selector.value)) || this.options === 'debug')
       this.wrappee?.validate(selector, errorTrigger);
   }
 

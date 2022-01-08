@@ -7,7 +7,7 @@ const form = new Form($('#form'), [
   new Rule('email', null, 'メールを入力してください'),
   new Rule('phone', null, '電話番号を入力してください'),
   new Rule('require', null, 'このフィールドは必須です'),
-]);
+], "debug");
 
 form.validate(new ErrorTriggerByAlert());
 $(document).ready(() => {
