@@ -1,6 +1,7 @@
 class ErrorTrigger {
   constructor(context) {
     this.context = context;
+    this.errorList = [];
   }
 
   setContext(context) {

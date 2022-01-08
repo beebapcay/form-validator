@@ -39,6 +39,7 @@ class Element extends Component {
   performValidate(errorTrigger) {
     if (this.haveRequire === false && this.selector.value === '') return;
     this.validator?.validate(this.selector, errorTrigger);
+    errorTrigger.triggerAction2();
   }
 
   performValid() {
