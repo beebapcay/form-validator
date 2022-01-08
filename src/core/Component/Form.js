@@ -1,9 +1,21 @@
 import Component from './Component.js';
 import Element from './Element.js';
+import defaultRules from '../Rule/index.js';
 
 class Form extends Component {
   constructor(selector, rules) {
     super(selector, rules);
+
+    this.rules = defaultRules;
+
+    rules?.forEach((rule) => {
+      const existRule = this.rules.find((r) => r.name === rule.name);
+      if (existRule) {
+        if (rule.validator) existRule.validator = rule.validator;
+        if (rule.message) existRule.message = rule.message;
+      } else this.rules.push(new Rule(rule.name, rule.validator, rule.message));
+    });
+
     this.elements = [];
   }
 
@@ -18,9 +30,9 @@ class Form extends Component {
     this.retrieve();
 
     // remove all element have class error_validator
-    const elements = document.getElementsByClassName("error_validator");
-    while(elements.length > 0){
-        elements[0].parentNode.removeChild(elements[0]);
+    const elements = document.getElementsByClassName('error_validator');
+    while (elements.length > 0) {
+      elements[0].parentNode.removeChild(elements[0]);
     }
 
     this.elements.forEach((element) => element.validate(errorTrigger.clone(element.selector)));

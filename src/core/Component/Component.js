@@ -1,16 +1,9 @@
-import defaultRules from '../Rule/index.js';
 import Rule from '../Rule/Rule.js';
 
 class Component {
   constructor(selector, rules) {
     this.selector = selector;
-    this.rules = defaultRules;
-
-    rules?.forEach((rule) => {
-      const existRule = this.rules.find((r) => r.name === rule.name);
-      if (existRule) existRule.update(rule.message);
-      else this.rules.push(new Rule(rule.name, rule.validator, rule.message));
-    });
+    this.rules = rules;
   }
 
   setup() {
