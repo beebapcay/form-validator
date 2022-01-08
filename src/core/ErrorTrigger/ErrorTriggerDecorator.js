@@ -14,6 +14,10 @@ class ErrorTriggerDecorator extends ErrorTrigger {
     this.triggerAction(error);
     this.wrappee?.trigger(error);
   }
+
+  clone(context) {
+    return new ErrorTriggerDecorator(context);
+  }
 }
 
 export default ErrorTriggerDecorator;

@@ -16,17 +16,21 @@ class Form extends Component {
 
   performValidate(errorTrigger) {
     this.retrieve();
-    this.elements.forEach((element) => element.validate(errorTrigger));
+    this.elements.forEach((element) => element.validate(errorTrigger.clone(element)));
   }
 
-  validate(errorTrigger){
+  validate(errorTrigger) {
     this.setup();
     // add onsubmit event listen
     const context = this;
-    this.selector[0].addEventListener("submit",function(event){
-      event.preventDefault();
-      context.performValidate(errorTrigger);
-    }, true);
+    this.selector[0].addEventListener(
+      'submit',
+      function (event) {
+        event.preventDefault();
+        context.performValidate(errorTrigger);
+      },
+      true
+    );
   }
 
   valid() {

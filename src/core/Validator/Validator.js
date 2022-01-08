@@ -4,11 +4,11 @@ class Validator {
     this.wrappee = null;
   }
 
-  setWrap(wrappee){
+  setWrap(wrappee) {
     this.wrappee = wrappee;
   }
 
-  setAgrument(argument){
+  setAgrument(argument) {
     this.argument = argument;
   }
 
@@ -22,7 +22,7 @@ class Validator {
   }
 
   valid(selector) {
-    let validWrappee = true
+    let validWrappee = true;
     if (this.wrappee) {
       validWrappee = this.wrappee?.valid(selector);
     }

@@ -10,6 +10,10 @@ class ErrorTrigger {
   trigger(error) {
     return undefined;
   }
+
+  clone(context) {
+    return undefined;
+  }
 }
 
 export default ErrorTrigger;
