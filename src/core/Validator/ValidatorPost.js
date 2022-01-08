@@ -1,5 +1,5 @@
 import Validator from './Validator.js';
-import {Error} from "../ErrorTrigger";
+import {Error} from "../ErrorTrigger/index.js";
 
 class ValidatorPost extends Validator {
   constructor(rule) {
