@@ -30,6 +30,10 @@
       border-radius: 4px;
       cursor: pointer;
     }
+
+    .error_validator{
+      color: red;
+    }
   </style>
   <body>
     <form id="form" style="width: 50%">
@@ -41,6 +45,7 @@
         aria-label="Date of birth"
         placeholder="yyyy/mm/dd"
         data-date
+        data-phone
         data-require
       />
 
@@ -56,13 +61,13 @@
       />
 
       <label for="phone">Phone number</label>
-      <input type="text" id="phone" name="phone" aria-label="Phone number" data-phone data-require />
+      <input type="text" name="phone" id="phone" aria-label="Phone number" data-phone data-require />
 
       <label for="phone">URL</label>
-      <input type="text" id="url" name="url" aria-label="URL" data-url data-require />
+      <input type="text" name="url" id="url" aria-label="URL" data-url data-require />
 
       <label for="text">Text</label>
-      <input type="text" id="text" name="text" aria-label="text" data-minlength="2" />
+      <input type="text" name="text" id="text" aria-label="text" data-minlength="2" />
 
       <!--  <p data-date>abc</p>-->
       <button type="submit">Submit</button>

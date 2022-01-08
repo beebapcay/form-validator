@@ -16,7 +16,14 @@ class Form extends Component {
 
   performValidate(errorTrigger) {
     this.retrieve();
-    this.elements.forEach((element) => element.validate(errorTrigger.clone(element)));
+
+    // remove all element have class error_validator
+    const elements = document.getElementsByClassName("error_validator");
+    while(elements.length > 0){
+        elements[0].parentNode.removeChild(elements[0]);
+    }
+
+    this.elements.forEach((element) => element.validate(errorTrigger.clone(element.selector)));
   }
 
   validate(errorTrigger) {
