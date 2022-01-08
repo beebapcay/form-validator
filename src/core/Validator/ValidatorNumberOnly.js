@@ -1,5 +1,5 @@
 import {REGEX_NUMBER_ONLY} from "../../utils";
-import ValidatorWithSingleInput from "./ValidatorWithSingleInput";
+import ValidatorWithSingleInput from "./ValidatorWithSingleInput.js";
 
 class ValidatorNumberOnly extends ValidatorWithSingleInput {
   constructor(rule) {
