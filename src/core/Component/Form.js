@@ -17,20 +17,16 @@ class Form extends Component {
       } else this.rules.push(new Rule(rule.name, rule.validator, rule.message));
     });
 
-    this.schema = schema;
-
     this.elements = [];
-  }
 
-  retrieve() {
-    if (this.elements.length !== 0) return;
+    // retrieve all elements and add schema
     $(this.selector)
       .children()
       .each((i, e) => {
         this.elements.push(new Element(e, this.rules, this.options));
 
-        if (!this.schema) return;
-        const rules = this.schema[$(e).attr('name')];
+        if (!schema) return;
+        const rules = schema[$(e).attr('name')];
         if (!rules) return;
         Object.entries(rules).forEach(([key, value]) => {
           $(e).data(key, value);
@@ -39,39 +35,31 @@ class Form extends Component {
   }
 
   performValidate(errorTrigger) {
-    this.retrieve();
-
-    // remove all element have class error_validator
-    const elements = document.getElementsByClassName('error_validator');
-    while (elements.length > 0) {
-      elements[0].parentNode.removeChild(elements[0]);
-    }
-
-    this.elements.forEach((element) => {
-      element.validate(errorTrigger.clone(element.selector));
-    });
-  }
-
-  validate(errorTrigger) {
-    this.setup();
-    // set the selector for error trigger
-    if (errorTrigger) {
-      errorTrigger.setContext(this.selector);
-    }
     // add onsubmit event listen
     const context = this;
     this.selector[0].addEventListener(
       'submit',
       function (event) {
         event.preventDefault();
-        context.performValidate(errorTrigger);
+
+        this.removePreviousErrorDom();
+        context.elements.forEach((element) => {
+          element.validate(errorTrigger.clone(element.selector));
+        });
       },
       true
     );
   }
 
-  valid() {
-    this.retrieve();
+  removePreviousErrorDom() {
+    // remove all element have class error_validator
+    const elements = document.getElementsByClassName('error_validator');
+    while (elements.length > 0) {
+      elements[0].parentNode.removeChild(elements[0]);
+    }
+  }
+
+  performValid() {
     const isErrors = [];
     this.elements.forEach((element) => isErrors.push(!element.valid()));
     return isErrors.every((error) => error === false);

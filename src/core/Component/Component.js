@@ -18,7 +18,7 @@ class Component {
 
   validate(errorTrigger) {
     this.setup();
-    return this.performValidate(errorTrigger);
+    this.performValidate(errorTrigger);
   }
 
   performValidate(errorTrigger) {

@@ -3,14 +3,13 @@ import ErrorTriggerDecorator from './ErrorTriggerDecorator.js';
 class ErrorTriggerByDom extends ErrorTriggerDecorator {
   triggerAction(error) {
     // create new node
-    var newItem = document.createElement("p");
-    var textnode = document.createTextNode(error.message);
-    newItem.appendChild(textnode);
-    newItem.className = 'error_validator';
-    newItem.id = "error" +  this.context.getAttribute("name");
+    var errorTextNode = document.createElement('p');
+    var content = document.createTextNode(error.message);
+    errorTextNode.appendChild(content);
+    errorTextNode.className = 'error_validator';
 
     // add node after element
-    this.context.parentNode.insertBefore(newItem,this.context.nextSibling);
+    this.context.parentNode.insertBefore(errorTextNode, this.context.nextSibling);
   }
 
   clone(context) {

@@ -5,19 +5,18 @@ class ErrorTriggerByAlert extends ErrorTriggerDecorator {
     this.errorList.push(error);
   }
 
-  triggerAction2(){
+  notify() {
     if (this.errorList.length === 0) return;
-    let msg = ''
-    this.name = $(this.context).attr('name')
-    if (this.name !== undefined) {
-      msg += `Error occurred at element has the name: ${this.name}\n`
-    }
-    if (this.context.value !== undefined) {
-      msg += `Current value: ${this.context.value} \n`
-    }
-    this.errorList.forEach(error => {
-      msg += error.message + '\n';
-    });
+
+    let msg = '';
+
+    const name = $(this.context).attr('name');
+    const value = $(this.context).val();
+
+    name && (msg += `Error occurred at element has the name: ${name}\n`);
+    value && (msg += `Current value: ${value} \n`);
+
+    this.errorList.forEach((error) => (msg += error.message + '\n'));
     alert(msg);
   }
 

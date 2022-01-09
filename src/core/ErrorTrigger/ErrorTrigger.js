@@ -1,18 +1,14 @@
-class ErrorTrigger {
+export default class ErrorTrigger {
   constructor(context) {
     this.context = context;
     this.errorList = [];
-  }
-
-  setContext(context) {
-    this.context = context;
   }
 
   triggerAction(error) {
     return undefined;
   }
 
-  triggerAction2(){
+  notify() {
     return undefined;
   }
 
@@ -24,5 +20,3 @@ class ErrorTrigger {
     return undefined;
   }
 }
-
-export default ErrorTrigger;

@@ -3,6 +3,7 @@ class Validator {
     this.rule = rule;
     this.wrappee = null;
     this.options = options;
+    this.argument = null;
   }
 
   setWrap(wrappee) {

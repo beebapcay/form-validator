@@ -5,14 +5,14 @@ class Element extends Component {
     super(selector, rules, options);
 
     this.validator = null;
-    this.haveRequire = false;
+    this.isRequire = false;
   }
 
   performValidate(errorTrigger) {
     this.setupValidators();
-    if (this.haveRequire === false && this.selector.value === '') return;
+    if (this.isRequire === false && this.selector.value === '') return;
     this.validator?.validate(this.selector, errorTrigger);
-    errorTrigger.triggerAction2();
+    errorTrigger.notify();
   }
 
   performValid() {
@@ -27,14 +27,15 @@ class Element extends Component {
     const checkers = $(this.selector).data();
 
     Object.entries(checkers).forEach(([key, value]) => {
-      const a = this.rules.find((rule) => rule.name === key);
-      const validator = a?.validator;
+      const rule = this.rules.find((rule) => rule.name === key);
+
+      const validator = rule?.validator;
       if (!validator) return false;
 
       // sure that require is the first wrap
-      if (a.name === 'require') {
-        this.haveRequire = true;
-        const wrap = new validator(a, this.options);
+      if (rule.name === 'require') {
+        this.isRequire = true;
+        const wrap = new validator(rule, this.options);
         wrap.setWrap(this.validator);
         this.validator = wrap;
         if (wrapTemp === null) wrapTemp = this.validator;
@@ -42,10 +43,10 @@ class Element extends Component {
       }
 
       if (this.validator === null) {
-        this.validator = new validator(a, this.options);
+        this.validator = new validator(rule, this.options);
         wrapTemp = this.validator;
       } else {
-        const wrap = new validator(a, this.options);
+        const wrap = new validator(rule, this.options);
         wrapTemp.setWrap(wrap);
         wrapTemp = wrap;
       }

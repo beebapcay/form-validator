@@ -1,13 +1,9 @@
 import ErrorTrigger from './ErrorTrigger.js';
 
-class ErrorTriggerDecorator extends ErrorTrigger {
+export default class ErrorTriggerDecorator extends ErrorTrigger {
   constructor(context, wrappee) {
     super(context);
     this.wrappee = wrappee;
-  }
-
-  triggerAction(error) {
-    return undefined;
   }
 
   trigger(error) {
@@ -19,5 +15,3 @@ class ErrorTriggerDecorator extends ErrorTrigger {
     return new ErrorTriggerDecorator(context);
   }
 }
-
-export default ErrorTriggerDecorator;

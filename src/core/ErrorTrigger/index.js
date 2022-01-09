@@ -5,25 +5,4 @@ import ErrorTriggerByLog from './ErrorTriggerByLog.js';
 import ErrorTriggerByAlert from './ErrorTriggerByAlert.js';
 import Error from './Error.js';
 
-export default class ErrorTriggerFactory {
-  createErrorTriggerByDom(context, wrappee) {
-    return new ErrorTriggerByDom(context, wrappee);
-  }
-
-  createErrorTriggerByLog(context, wrappee) {
-    return new ErrorTriggerByLog(context, wrappee);
-  }
-
-  createErrorTriggerByAlert(context, wrappee) {
-    return new ErrorTriggerByAlert(context, wrappee);
-  }
-}
-
-export {
-  ErrorTrigger,
-  ErrorTriggerDecorator,
-  ErrorTriggerByDom,
-  ErrorTriggerByLog,
-  ErrorTriggerByAlert,
-  Error
-};
+export { ErrorTrigger, ErrorTriggerDecorator, ErrorTriggerByDom, ErrorTriggerByLog, ErrorTriggerByAlert, Error };

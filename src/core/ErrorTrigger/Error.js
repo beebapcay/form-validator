@@ -1,20 +1,18 @@
 export default class Error {
-  constructor(selector, message, value) {
-    this.name = $(selector).attr('name');
+  constructor(selector, message) {
     this.selector = selector;
     this.message = message;
-    this.value = value;
   }
 
-  getDefaultMessage() {
-    let msg = ''
-    if (this.name !== undefined) {
-      msg += `Error occurred at element has the name: ${this.name}\n`
-    }
-    if (this.value !== undefined) {
-      msg += `Current value: ${this.value}\n`
-    }
-    msg += `${this.message}`
-    return msg
+  generateMessage() {
+    const msg = '';
+
+    const name = $(this.selector).attr('name');
+    const value = $(this.selector).val();
+
+    name && (msg += `Error occurred at element has the name: ${name}\n`);
+    value && (msg += `Current value: ${this.value}\n`);
+    msg += `${this.message}`;
+    return msg;
   }
 }
