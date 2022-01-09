@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="module" src="./index.js"></script>
+    <title>Document</title>
+  </head>
+  <style>
+    /* Style inputs */
+    input[type='text'],
+    select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    /* Style the submit button */
+    button {
+      width: 100%;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: 2px solid #616161;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .error_validator {
+      color: red;
+    }
+  </style>
+  <body>
+    <form id="form" style="width: 50%">
+      <label for="date-of-birth">Date of birth</label>
+      <input type="date" style="width: 100%;" id="date-of-birth" name="date-of-birth" aria-label="Date of birth" placeholder="yyyy/mm/dd" />
+      <label for="email">Email</label>
+      <input
+        name="email"
+        type="text"
+        id="email"
+        aria-label="Email"
+        placeholder="email@example.com"
+        data-email
+        data-require
+      />
+
+      <label for="phone">Phone number</label>
+      <input type="text" name="phone" id="phone" aria-label="Phone number" data-phone data-require />
+
+      <label for="phone">URL</label>
+      <input type="text" name="url" id="url" aria-label="URL" data-url data-require />
+
+      <label for="text">Text</label>
+      <input type="text" name="text" id="text" aria-label="text" data-maxlength="2" />
+
+      <label for="text">Type ABC</label>
+      <input type="text" name="text-abc" id="text-abc" aria-label="text" data-abc data-require />
+
+      <label for="text">Regular expression</label>
+      <input type="text" name="regex" id="regex" aria-label="regex" data-regex="([A-Z])+" data-require />
+
+      <!--  <p data-date>abc</p>-->
+      <button type="submit">Submit</button>
+      <button id="valid">Valid</button>
+    </form>
+
+    <div id="info"></div>
+    <div id="check-valid-result"></div>
+  </body>
+</html>
