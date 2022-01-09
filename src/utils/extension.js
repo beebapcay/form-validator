@@ -1,5 +1,5 @@
-export function extension(str) {
-    const regex = /^.{1,}\.[^\\]+$/
+export const Extension_regex = /^.{1,}\.[^\\]+$/
 
-    return regex.test(str)
+export function extension(str) {
+    return Extension_regex.test(str)
 }

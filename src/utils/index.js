@@ -28,3 +28,6 @@ export * from './time12.js';
 export * from './time24.js';
 export * from './url.js';
 export * from './zip_code54.js';
+export * from './manyEmail.js';
+export * from './gmail.js'
+export * from './yahoo.js'

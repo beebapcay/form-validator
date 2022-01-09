@@ -17,6 +17,14 @@ const rules = [
   new Rule('ipv6', validator.ipv6, 'The value must be in IPvV6 format'),
   new Rule('nowhitespace', validator.nowhitespace, 'The value must not contain any whitespace'),
   new Rule('numberonly', validator.numberonly, 'The value must contain numbers only'),
+  new Rule('regex', validator.regex, function (argument) {
+    return `The value must match with the provided regular expression: ${argument}`
+  }),
+  new Rule('creditcard', validator.creditcard, 'The value must be Visa or Mastercard'),
+  new Rule('extension', validator.extension, 'The value must be a files name with extension'),
+  new Rule('manyemail', validator.manyemail, 'The value must be one or more email separated by ";" symbol'),
+  new Rule('gmail', validator.gmail, 'The email must be from google domain (@gmail.com or @google.com)'),
+  new Rule('yahoo', validator.yahoo, 'The email must be from Yahoo domain (@yahoo.com, @ymail.com or @rocketmail.com)'),
 ];
 
 

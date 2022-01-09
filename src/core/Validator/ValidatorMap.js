@@ -13,6 +13,12 @@ import ValidatorIPV4 from "./ValidatorIPV4.js";
 import ValidatorIPV6 from "./ValidatorIPV6.js";
 import ValidatorNoWhiteSpace from "./ValidatorNoWhiteSpace.js";
 import ValidatorNumberOnly from "./ValidatorNumberOnly.js";
+import ValidatorRegex from "./ValidatorRegex.js";
+import ValidatorCreditCard from "./ValidatorCreditCard.js";
+import ValidatorExtension from "./ValidatorExtension.js";
+import ValidatorManyEmail from './ValidatorManyEmail.js';
+import ValidatorGmail from './ValidatorGmail.js';
+import ValidatorYahoo from './ValidatorYahoo.js';
 
 export const validator = {
   alphaonly: ValidatorAlphaOnly,
@@ -30,6 +36,12 @@ export const validator = {
   ipv6: ValidatorIPV6,
   nowhitespace: ValidatorNoWhiteSpace,
   numberonly: ValidatorNumberOnly,
+  regex: ValidatorRegex,
+  creditcard: ValidatorCreditCard,
+  extension: ValidatorExtension,
+  manyemail: ValidatorManyEmail,
+  gmail: ValidatorGmail,
+  yahoo: ValidatorYahoo,
 };
 
 export default validator;

@@ -38,7 +38,7 @@
   <body>
     <form id="form" style="width: 50%">
       <label for="date-of-birth">Date of birth</label>
-      <input type="date" id="date-of-birth" name="date-of-birth" aria-label="Date of birth" placeholder="yyyy/mm/dd" />
+      <input type="date" style="width: 100%;" id="date-of-birth" name="date-of-birth" aria-label="Date of birth" placeholder="yyyy/mm/dd" />
       <label for="email">Email</label>
       <input
         name="email"
@@ -61,6 +61,9 @@
 
       <label for="text">Type ABC</label>
       <input type="text" name="text-abc" id="text-abc" aria-label="text" data-abc data-require />
+
+      <label for="text">Regular expression</label>
+      <input type="text" name="regex" id="regex" aria-label="regex" data-regex="([A-Z])+" data-require />
 
       <!--  <p data-date>abc</p>-->
       <button type="submit">Submit</button>
