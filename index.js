@@ -1,6 +1,7 @@
 import Form from './src/core/Component/Form.js';
 import ErrorTriggerByDom from './src/core/ErrorTrigger/ErrorTriggerByDom.js';
 import ErrorTriggerByAlert from './src/core/ErrorTrigger/ErrorTriggerByAlert.js';
+import CustomValidator from './CustomValidator.js';
 
 const form = new Form(
   $('#form'), // selector
@@ -16,6 +17,7 @@ const form = new Form(
 );
 
 form.validate(new ErrorTriggerByDom());
+
 $(document).ready(() => {
   $('#valid').on('click', (e) => {
     e.preventDefault();
