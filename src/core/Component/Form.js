@@ -34,6 +34,14 @@ class Form extends Component {
       });
   }
 
+  removePreviousErrorDom() {
+    // remove all element have class error_validator
+    const elements = document.getElementsByClassName('error_validator');
+    while (elements.length > 0) {
+      elements[0].parentNode.removeChild(elements[0]);
+    }
+  }
+
   performValidate(errorTrigger) {
     // add onsubmit event listen
     const context = this;
@@ -42,21 +50,13 @@ class Form extends Component {
       function (event) {
         event.preventDefault();
 
-        this.removePreviousErrorDom();
+        context.removePreviousErrorDom();
         context.elements.forEach((element) => {
           element.validate(errorTrigger.clone(element.selector));
         });
       },
       true
     );
-  }
-
-  removePreviousErrorDom() {
-    // remove all element have class error_validator
-    const elements = document.getElementsByClassName('error_validator');
-    while (elements.length > 0) {
-      elements[0].parentNode.removeChild(elements[0]);
-    }
   }
 
   performValid() {

@@ -9,10 +9,9 @@ const form = new Form(
     // schema
     'date-of-birth': {
       require: true,
-      date: true,
     },
   },
-  'simple' // options
+  'debug' // options
 );
 
 form.validate(new ErrorTriggerByDom());
