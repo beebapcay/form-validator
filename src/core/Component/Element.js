@@ -6,9 +6,26 @@ class Element extends Component {
 
     this.validator = null;
     this.haveRequire = false;
+  }
 
-    var wrapTemp = null;
+  performValidate(errorTrigger) {
+    this.setupValidators();
+    if (this.haveRequire === false && this.selector.value === '') return;
+    this.validator?.validate(this.selector, errorTrigger);
+    errorTrigger.triggerAction2();
+  }
+
+  performValid() {
+    this.setupValidators();
+    // ignore elements that do not have validators
+    if (!this.validator) return true;
+    return this.validator?.valid(this.selector);
+  }
+
+  setupValidators() {
+    let wrapTemp = null;
     const checkers = $(this.selector).data();
+
     Object.entries(checkers).forEach(([key, value]) => {
       const a = this.rules.find((rule) => rule.name === key);
       const validator = a?.validator;
@@ -34,18 +51,6 @@ class Element extends Component {
       }
       wrapTemp.setAgrument(value);
     });
-  }
-
-  performValidate(errorTrigger) {
-    if (this.haveRequire === false && this.selector.value === '') return;
-    this.validator?.validate(this.selector, errorTrigger);
-    errorTrigger.triggerAction2();
-  }
-
-  performValid() {
-    // ignore elements that do not have validators
-    if (!this.validator) return true;
-    return this.validator?.valid(this.selector);
   }
 }
 

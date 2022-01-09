@@ -2,8 +2,8 @@ import Form from './src/core/Component/Form.js';
 import ErrorTriggerByDom from './src/core/ErrorTrigger/ErrorTriggerByDom.js';
 import ErrorTriggerByAlert from './src/core/ErrorTrigger/ErrorTriggerByAlert.js';
 import Rule from './src/core/Rule/Rule.js';
-import Validator from "./src/core/Validator/Validator.js";
-import {Error} from "./src/core/ErrorTrigger";
+import Validator from './src/core/Validator/Validator.js';
+import { Error } from './src/core/ErrorTrigger/index.js';
 
 // Add a custom rule by extending Validator class
 class CustomValidator extends Validator {
@@ -24,12 +24,17 @@ class CustomValidator extends Validator {
   }
 }
 
-const form = new Form($('#form'), [
-  new Rule('email', null, 'メールを入力してください'),
-  new Rule('phone', null, '電話番号を入力してください'),
-  new Rule('require', null, 'このフィールドは必須です'),
-  new Rule('abc', CustomValidator, 'Type "ABC" to pass this'),
-]);
+const form = new Form(
+  $('#form'),
+  null,
+  {
+    'date-of-birth': {
+      require: true,
+      date: true,
+    },
+  },
+  'debug'
+);
 
 form.validate(new ErrorTriggerByDom());
 $(document).ready(() => {

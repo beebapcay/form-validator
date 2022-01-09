@@ -31,25 +31,14 @@
       cursor: pointer;
     }
 
-    .error_validator{
+    .error_validator {
       color: red;
     }
   </style>
   <body>
     <form id="form" style="width: 50%">
       <label for="date-of-birth">Date of birth</label>
-      <input
-        type="text"
-        id="date-of-birth"
-        name="date-of-birth"
-        aria-label="Date of birth"
-        placeholder="yyyy/mm/dd"
-        data-date
-        data-require
-      />
-<!--        data-phone-->
-<!--        data-url-->
-
+      <input type="text" id="date-of-birth" name="date-of-birth" aria-label="Date of birth" placeholder="yyyy/mm/dd" />
       <label for="email">Email</label>
       <input
         name="email"
@@ -71,7 +60,7 @@
       <input type="text" name="text" id="text" aria-label="text" data-maxlength="2" />
 
       <label for="text">Type ABC</label>
-      <input type="text" name="text-abc" id="text-abc" aria-label="text" data-abc data-require/>
+      <input type="text" name="text-abc" id="text-abc" aria-label="text" data-abc data-require />
 
       <!--  <p data-date>abc</p>-->
       <button type="submit">Submit</button>

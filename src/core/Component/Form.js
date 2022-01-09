@@ -4,7 +4,7 @@ import defaultRules from '../Rule/index.js';
 import Rule from '../Rule/Rule.js';
 
 class Form extends Component {
-  constructor(selector, rules, options) {
+  constructor(selector, rules, schema, options = 'simple') {
     super(selector, rules, options);
 
     this.rules = defaultRules;
@@ -17,6 +17,8 @@ class Form extends Component {
       } else this.rules.push(new Rule(rule.name, rule.validator, rule.message));
     });
 
+    this.schema = schema;
+
     this.elements = [];
   }
 
@@ -24,7 +26,16 @@ class Form extends Component {
     if (this.elements.length !== 0) return;
     $(this.selector)
       .children()
-      .each((i, e) => this.elements.push(new Element(e, this.rules, this.options)));
+      .each((i, e) => {
+        this.elements.push(new Element(e, this.rules, this.options));
+
+        if (!this.schema) return;
+        const rules = this.schema[$(e).attr('name')];
+        if (!rules) return;
+        Object.entries(rules).forEach(([key, value]) => {
+          $(e).data(key, value);
+        });
+      });
   }
 
   performValidate(errorTrigger) {
@@ -36,7 +47,9 @@ class Form extends Component {
       elements[0].parentNode.removeChild(elements[0]);
     }
 
-    this.elements.forEach((element) => element.validate(errorTrigger.clone(element.selector)));
+    this.elements.forEach((element) => {
+      element.validate(errorTrigger.clone(element.selector));
+    });
   }
 
   validate(errorTrigger) {
