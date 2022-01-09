@@ -5,6 +5,7 @@ import CustomValidator from './CustomValidator.js';
 
 const form = new Form(
   $('#form'), // selector
+  // [new Rule('abc', CustomValidator, 'Require input abc')],
   null, // custom rule
   {
     // schema
@@ -13,7 +14,7 @@ const form = new Form(
       email: true,
     },
   },
-  'debug' // options
+  'debug' // options debug | simple
 );
 
 form.validate(new ErrorTriggerByDom());
