@@ -6,7 +6,7 @@ class Validator {
     this.argument = null;
   }
 
-  setWrap(wrappee) {
+  setWrapee(wrappee) {
     this.wrappee = wrappee;
   }
 

@@ -9,6 +9,7 @@ const form = new Form(
     // schema
     'date-of-birth': {
       require: true,
+      email: true,
     },
   },
   'debug' // options

@@ -23,14 +23,12 @@ class Form extends Component {
     $(this.selector)
       .children()
       .each((i, e) => {
-        this.elements.push(new Element(e, this.rules, this.options));
+        if (schema) {
+          const schemaRules = schema[$(e).attr('name')];
+          if (schemaRules) Object.entries(schemaRules).forEach(([key, value]) => $(e).data(key, value));
+        }
 
-        if (!schema) return;
-        const rules = schema[$(e).attr('name')];
-        if (!rules) return;
-        Object.entries(rules).forEach(([key, value]) => {
-          $(e).data(key, value);
-        });
+        this.elements.push(new Element(e, this.rules, this.options));
       });
   }
 

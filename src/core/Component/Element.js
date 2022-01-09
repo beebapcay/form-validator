@@ -6,52 +6,56 @@ class Element extends Component {
 
     this.validator = null;
     this.isRequire = false;
+
+    this.setupValidators();
   }
 
   performValidate(errorTrigger) {
-    this.setupValidators();
+    // this.setupValidators();
     if (this.isRequire === false && this.selector.value === '') return;
     this.validator?.validate(this.selector, errorTrigger);
     errorTrigger.notify();
   }
 
   performValid() {
-    this.setupValidators();
+    // this.setupValidators();
     // ignore elements that do not have validators
     if (!this.validator) return true;
     return this.validator?.valid(this.selector);
   }
 
   setupValidators() {
-    let wrapTemp = null;
     const checkers = $(this.selector).data();
+    console.log($(this.selector).attr('name'), checkers);
 
     Object.entries(checkers).forEach(([key, value]) => {
-      const rule = this.rules.find((rule) => rule.name === key);
+      if (key === 'require') return false;
 
-      const validator = rule?.validator;
+      const validator = this.createValidator(key, value);
       if (!validator) return false;
 
-      // sure that require is the first wrap
-      if (rule.name === 'require') {
-        this.isRequire = true;
-        const wrap = new validator(rule, this.options);
-        wrap.setWrap(this.validator);
-        this.validator = wrap;
-        if (wrapTemp === null) wrapTemp = this.validator;
-        return false;
-      }
-
-      if (this.validator === null) {
-        this.validator = new validator(rule, this.options);
-        wrapTemp = this.validator;
-      } else {
-        const wrap = new validator(rule, this.options);
-        wrapTemp.setWrap(wrap);
-        wrapTemp = wrap;
-      }
-      wrapTemp.setAgrument(value);
+      validator.setWrapee(this.validator);
+      this.validator = validator;
     });
+
+    if (checkers.hasOwnProperty('require')) {
+      this.isRequire = true;
+      const validator = this.createValidator('require', true);
+      if (!validator) return false;
+      validator.setWrapee(this.validator);
+      this.validator = validator;
+    }
+  }
+
+  createValidator(name, argument) {
+    const rule = this.rules.find((rule) => rule.name === name);
+
+    const validator = rule?.validator;
+    if (!validator) return null;
+
+    const newValidator = new validator(rule, this.options);
+    newValidator.setAgrument(argument);
+    return newValidator;
   }
 }
 
