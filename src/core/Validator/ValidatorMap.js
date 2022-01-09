@@ -13,6 +13,7 @@ import ValidatorIPV4 from "./ValidatorIPV4.js";
 import ValidatorIPV6 from "./ValidatorIPV6.js";
 import ValidatorNoWhiteSpace from "./ValidatorNoWhiteSpace.js";
 import ValidatorNumberOnly from "./ValidatorNumberOnly.js";
+import ValidatorRegex from "./ValidatorRegex.js";
 
 export const validator = {
   alphaonly: ValidatorAlphaOnly,
@@ -30,6 +31,7 @@ export const validator = {
   ipv6: ValidatorIPV6,
   nowhitespace: ValidatorNoWhiteSpace,
   numberonly: ValidatorNumberOnly,
+  regex: ValidatorRegex,
 };
 
 export default validator;

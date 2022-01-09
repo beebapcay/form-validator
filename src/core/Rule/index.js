@@ -17,6 +17,9 @@ const rules = [
   new Rule('ipv6', validator.ipv6, 'The value must be in IPvV6 format'),
   new Rule('nowhitespace', validator.nowhitespace, 'The value must not contain any whitespace'),
   new Rule('numberonly', validator.numberonly, 'The value must contain numbers only'),
+  new Rule('regex', validator.regex, function (argument) {
+    return `The value must match with the provided regular expression: ${argument}`
+  })
 ];
 
 
